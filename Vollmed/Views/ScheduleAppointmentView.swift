@@ -27,7 +27,7 @@ struct ScheduleAppointmentView: View {
                 }
             
             Button(action: {
-                print("Botão pressionado")
+                print(selectedDate.convertToString())
             }, label: {
                 ButtonView(text: "Agendar consulta")
             })
