@@ -22,12 +22,13 @@ struct ScheduleAppointmentView: View {
             
             DatePicker("Escolha a data da consulta", selection: $selectedDate, in: Date()...)
                 .datePickerStyle(.graphical)
+                .environment(\.locale, Locale.init(identifier: "pt-BR"))
                 .onAppear {
                     UIDatePicker.appearance().minuteInterval = 15
                 }
             
             Button(action: {
-                print(selectedDate.convertToString())
+                print(selectedDate.convertToString().convertDateStringToReadableDate())
             }, label: {
                 ButtonView(text: "Agendar consulta")
             })
