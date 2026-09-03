@@ -11,15 +11,27 @@ struct WebService {
     
     private let baseURL = "http://localhost:3001"
     
+    let imageCache = NSCache<NSString, UIImage>()
+    
     func downloadImage(from imageURL: String) async throws -> UIImage? {
         guard let url = URL(string: imageURL) else {
             print("Erro na URL!")
             return nil
         }
         
-        let (data, _) = try await URLSession.shared.data(from: url)
+        // Verificar cache
+        if let cachedImage = imageCache.object(forKey: imageURL as NSString) {
+            return cachedImage
+        }
         
-        return UIImage(data: data)
+        let (data, _) = try await URLSession.shared.data(from: url)
+        guard let image = UIImage(data: data) else {
+            return nil
+        }
+        
+        imageCache.setObject(image, forKey: imageURL as NSString)
+        
+        return image
     }
     
     func getAllSpecialists() async throws -> [Specialist]? {
