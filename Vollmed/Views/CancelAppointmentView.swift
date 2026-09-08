@@ -9,7 +9,29 @@ import SwiftUI
 
 struct CancelAppointmentView: View {
     
+    var appointmentID: String
+    let service = WebService()
+    
     @State private var reasonToCancel = ""
+    @State private var isCancelAppointment: Bool = false
+    @State private var showAlert: Bool = false
+    
+    @Environment(\.dismiss) private var dismiss
+    
+    func cancelAppointment() async {
+        do {
+            if try await service.cancelAppointment(appointmentID: appointmentID, reasonToCancel: reasonToCancel) {
+                print("Consulta cancelada com sucesso!")
+                isCancelAppointment = true
+            } else {
+                isCancelAppointment = false
+            }
+        } catch {
+            print("Ocorreu um erro ao desmarcar a consulta \(error)")
+            isCancelAppointment = false
+        }
+        showAlert = true
+    }
     
     var body: some View {
         VStack(spacing: 16.0) {
@@ -30,7 +52,9 @@ struct CancelAppointmentView: View {
                 .frame(maxHeight: 300)
             
             Button(action: {
-                print("Botão pressionado")
+                Task {
+                    await cancelAppointment()
+                }
             }, label: {
                 ButtonView(text: "Cancelar consulta", buttonType: .cancel)
             })
@@ -38,9 +62,24 @@ struct CancelAppointmentView: View {
         .padding()
         .navigationTitle("Cancelar consulta")
         .navigationBarTitleDisplayMode(.large)
+        .alert(isCancelAppointment ? "Sucesso!" : "Ops, algo deu errado!",
+               isPresented: $showAlert,
+               presenting: isCancelAppointment) { _ in
+            Button(action: {
+                dismiss()
+            }, label: {
+                Text("OK")
+            })
+        } message: { isScheduled in
+            if isScheduled {
+                Text("A consulta foi cancelada com sucesso!")
+            } else {
+                Text("Houve um erro ao cancelar sua consulta. Por favor tente novamente ou entre em contato via telefone.")
+            }
+        }
     }
 }
 
 #Preview {
-    CancelAppointmentView()
+    CancelAppointmentView(appointmentID: "123")
 }

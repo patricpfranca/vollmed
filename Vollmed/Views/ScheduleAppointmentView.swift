@@ -15,8 +15,6 @@ struct ScheduleAppointmentView: View {
     var isRescheduleView: Bool
     var appointmentID: String?
     
-    
-    
     @State private var selectedDate: Date = Date()
     @State private var showAlert: Bool = false
     @State private var isAppointmentScheduled: Bool = false
