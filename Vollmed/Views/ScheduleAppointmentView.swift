@@ -15,6 +15,8 @@ struct ScheduleAppointmentView: View {
     var isRescheduleView: Bool
     var appointmentID: String?
     
+    
+    
     @State private var selectedDate: Date = Date()
     @State private var showAlert: Bool = false
     @State private var isAppointmentScheduled: Bool = false
@@ -32,6 +34,18 @@ struct ScheduleAppointmentView: View {
             print("Houve um erro ao obter ID da consulta")
             return
         }
+        
+        do {
+            if let _ = try await service.rescheduleAppointment(appointmentID: appointmentID, date: selectedDate.convertToString()) {
+                isAppointmentScheduled = true
+            } else {
+                isAppointmentScheduled = false
+            }
+        } catch {
+            print("Ocorreu um erro ao remarcar consulta \(error)")
+            isAppointmentScheduled = false
+        }
+        showAlert = true
     }
     
     func scheduleAppointment() async {
