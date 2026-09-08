@@ -25,8 +25,16 @@ struct MyAppointmentsView: View {
     
     var body: some View {
         ScrollView(.vertical, showsIndicators: false) {
-            ForEach(appointments) { appointment in
-                SpecialistCardView(specialist: appointment.specialist, appointment: appointment)
+            if appointments.isEmpty {
+                Text("Não há nenhuma consulta agendada no momento!")
+                    .font(.title3)
+                    .bold()
+                    .foregroundStyle(.cancel)
+                    .multilineTextAlignment(.center)
+            } else {
+                ForEach(appointments) { appointment in
+                    SpecialistCardView(specialist: appointment.specialist, appointment: appointment)
+                }
             }
         }
         .navigationTitle("Minhas consultas")
