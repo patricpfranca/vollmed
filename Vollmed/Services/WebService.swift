@@ -15,6 +15,21 @@ struct WebService {
     
     let imageCache = NSCache<NSString, UIImage>()
     
+    func getAllAppointmentsFromPatient(patientID: String) async throws -> [Appointment]? {
+        let endpoint = "\(baseURL)/paciente/\(patientID)/consultas"
+        
+        guard let url = URL(string: endpoint) else {
+            print("Erro na URL!")
+            return nil
+        }
+        
+        let (data, _) = try await URLSession.shared.data(from: url)
+        
+        let appointments = try JSONDecoder().decode([Appointment].self, from: data)
+        
+        return appointments
+    }
+    
     func scheduleAppointment(specialistID: String,
                              patientID: String,
                              date: String) async throws -> ScheduleAppointmentResponse? {
