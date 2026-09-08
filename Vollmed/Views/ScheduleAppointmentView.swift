@@ -10,13 +10,29 @@ import SwiftUI
 struct ScheduleAppointmentView: View {
     
     let service = WebService()
+    
     var specialistID: String
+    var isRescheduleView: Bool
+    var appointmentID: String?
     
     @State private var selectedDate: Date = Date()
     @State private var showAlert: Bool = false
     @State private var isAppointmentScheduled: Bool = false
     
     @Environment(\.dismiss) private var dismiss
+    
+    init(specialistID: String, isRescheduleView: Bool = false, appointmentID: String? = nil) {
+        self.specialistID = specialistID
+        self.isRescheduleView = isRescheduleView
+        self.appointmentID = appointmentID
+    }
+    
+    func rescheduleAppointment() async {
+        guard let appointmentID  else {
+            print("Houve um erro ao obter ID da consulta")
+            return
+        }
+    }
     
     func scheduleAppointment() async {
         do {
@@ -47,14 +63,18 @@ struct ScheduleAppointmentView: View {
             
             Button(action: {
                 Task {
-                    await scheduleAppointment()
+                    if isRescheduleView {
+                        await rescheduleAppointment()
+                    } else {
+                        await scheduleAppointment()
+                    }
                 }
             }, label: {
-                ButtonView(text: "Agendar consulta")
+                ButtonView(text: isRescheduleView ? "Reagendar consulta" : "Agendar consulta")
             })
         }
         .padding()
-        .navigationTitle("Agendar consulta")
+        .navigationTitle(isRescheduleView ? "Reagendar consulta" : "Agendar consulta")
         .navigationBarTitleDisplayMode(.large)
         .onAppear {
             UIDatePicker.appearance().minuteInterval = 15
@@ -69,9 +89,9 @@ struct ScheduleAppointmentView: View {
             })
         } message: { isScheduled in
             if isScheduled {
-                Text("A consulta foi agendada com sucesso!")
+                Text("A consulta foi \(isRescheduleView ? "reagendada" : "agendada") com sucesso!")
             } else {
-                Text("Houve um erro ao agendar sua consulta, por favor tente novamente ou entre em contato via telefone.")
+                Text("Houve um erro ao \(isRescheduleView ? "reagendada" : "agendada") sua consulta, por favor tente novamente ou entre em contato via telefone.")
             }
         }
 
