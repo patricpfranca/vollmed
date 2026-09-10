@@ -29,28 +29,11 @@ struct SignInView: View {
                 .foregroundStyle(.gray)
                 .padding(.bottom)
             
-            Text("Email")
-                .font(.title3)
-                .bold()
-                .foregroundStyle(.accent)
-            
-            TextField("Insira seu email", text: $email)
-                .padding(14.0)
-                .background(Color.gray.opacity(0.25))
-                .clipShape(RoundedRectangle(cornerRadius: 14))
+            TextFieldLabelView(label: "Email", placeholder: "Insira seu email", value: $email, keyboardType: .emailAddress)
                 .autocorrectionDisabled()
-                .keyboardType(.emailAddress)
                 .textInputAutocapitalization(.never)
             
-            Text("Senha")
-                .font(.title3)
-                .bold()
-                .foregroundStyle(.accent)
-            
-            SecureField("Insira sua senha", text: $password)
-                .padding(14.0)
-                .background(Color.gray.opacity(0.25))
-                .clipShape(RoundedRectangle(cornerRadius: 14))
+            TextFieldLabelView(label: "Senha", placeholder: "Insira sua senha", value: $password, isSecure: true)
             
             Button(action: {
                 //
@@ -68,6 +51,7 @@ struct SignInView: View {
 
         }
         .padding()
+        .navigationBarBackButtonHidden()
     }
 }
 
