@@ -13,6 +13,32 @@ struct WebService {
     
     let imageCache = NSCache<NSString, UIImage>()
     
+    func logoutPatient() async throws -> Bool {
+        let endpoint = "\(baseURL)/auth/logout"
+        
+        guard let url = URL(string: endpoint) else {
+            print("Erro na URL!")
+            return false
+        }
+        
+        guard let token = KeychainHelper.get(for: "app-vollmed-token") else {
+            print("Token não informado")
+            return false
+        }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        
+        let (_, response) = try await URLSession.shared.data(for: request)
+        
+        if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 {
+            return true
+        }
+        
+        return false
+    }
+    
     func loginPatient(email: String, password: String) async throws -> LoginResponse? {
         let endpoint = "\(baseURL)/auth/login"
         
@@ -67,7 +93,7 @@ struct WebService {
             return false
         }
         
-        guard let token = UserDefaultsHelper.get(for: "token") else {
+        guard let token = KeychainHelper.get(for: "app-vollmed-token") else {
             print("Token não informado")
             return false
         }
@@ -100,7 +126,7 @@ struct WebService {
             return nil
         }
         
-        guard let token = UserDefaultsHelper.get(for: "token") else {
+        guard let token = KeychainHelper.get(for: "app-vollmed-token") else {
             print("Token não informado")
             return nil
         }
@@ -125,7 +151,7 @@ struct WebService {
     func getAllAppointmentsFromPatient(patientID: String) async throws -> [Appointment]? {
         let endpoint = "\(baseURL)/paciente/\(patientID)/consultas"
         
-        guard let token = UserDefaultsHelper.get(for: "token") else {
+        guard let token = KeychainHelper.get(for: "app-vollmed-token") else {
             print("Token não informado")
             return nil
         }
@@ -156,7 +182,7 @@ struct WebService {
             return nil
         }
         
-        guard let token = UserDefaultsHelper.get(for: "token") else {
+        guard let token = KeychainHelper.get(for: "app-vollmed-token") else {
             print("Token não informado")
             return nil
         }

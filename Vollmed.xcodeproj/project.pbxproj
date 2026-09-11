@@ -20,6 +20,8 @@
 		95059B993050AB11000369D5 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95059B983050AB11000369D5 /* SignInView.swift */; };
 		95059B9B3050AE47000369D5 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95059B9A3050AE47000369D5 /* SignUpView.swift */; };
 		95059B9D30517847000369D5 /* TextFieldLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95059B9C30517847000369D5 /* TextFieldLabelView.swift */; };
+		950A7358305423BB004E965E /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 950A7357305423BB004E965E /* KeychainHelper.swift */; };
+		950A735B30542EBA004E965E /* AuthenticationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 950A735A30542EBA004E965E /* AuthenticationManager.swift */; };
 		951CF1153052C823009DB1C3 /* Patient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 951CF1143052C823009DB1C3 /* Patient.swift */; };
 		951CF1173052CF03009DB1C3 /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = 951CF1163052CF03009DB1C3 /* Login.swift */; };
 		951CF1193052DDCB009DB1C3 /* UserDefaultsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 951CF1183052DDCB009DB1C3 /* UserDefaultsHelper.swift */; };
@@ -46,6 +48,8 @@
 		95059B983050AB11000369D5 /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
 		95059B9A3050AE47000369D5 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		95059B9C30517847000369D5 /* TextFieldLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldLabelView.swift; sourceTree = "<group>"; };
+		950A7357305423BB004E965E /* KeychainHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainHelper.swift; sourceTree = "<group>"; };
+		950A735A30542EBA004E965E /* AuthenticationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationManager.swift; sourceTree = "<group>"; };
 		951CF1143052C823009DB1C3 /* Patient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Patient.swift; sourceTree = "<group>"; };
 		951CF1163052CF03009DB1C3 /* Login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
 		951CF1183052DDCB009DB1C3 /* UserDefaultsHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsHelper.swift; sourceTree = "<group>"; };
@@ -109,6 +113,7 @@
 			children = (
 				484BEEFE2AB0F59D0033C07A /* WebService.swift */,
 				951CF1183052DDCB009DB1C3 /* UserDefaultsHelper.swift */,
+				950A7357305423BB004E965E /* KeychainHelper.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -132,6 +137,7 @@
 		48539DEB2AB0F47C005BD7C9 /* Vollmed */ = {
 			isa = PBXGroup;
 			children = (
+				950A735930542EA9004E965E /* Managers */,
 				958072173049926A0096171B /* Extensions */,
 				484BEEFB2AB0F56C0033C07A /* Services */,
 				484BEEFA2AB0F5680033C07A /* Models */,
@@ -150,6 +156,14 @@
 				48539DF32AB0F47D005BD7C9 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		950A735930542EA9004E965E /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				950A735A30542EBA004E965E /* AuthenticationManager.swift */,
+			);
+			path = Managers;
 			sourceTree = "<group>";
 		};
 		958072173049926A0096171B /* Extensions */ = {
@@ -235,6 +249,7 @@
 				958072193049927E0096171B /* Date+.swift in Sources */,
 				95059B9D30517847000369D5 /* TextFieldLabelView.swift in Sources */,
 				9580721D304996980096171B /* ScheduleAppointment.swift in Sources */,
+				950A7358305423BB004E965E /* KeychainHelper.swift in Sources */,
 				48539DEF2AB0F47C005BD7C9 /* ContentView.swift in Sources */,
 				9580721B304993E30096171B /* String+.swift in Sources */,
 				484BEF052AB0F7970033C07A /* HomeView.swift in Sources */,
@@ -243,6 +258,7 @@
 				484BEF012AB0F6090033C07A /* ButtonView.swift in Sources */,
 				951CF1193052DDCB009DB1C3 /* UserDefaultsHelper.swift in Sources */,
 				951CF1153052C823009DB1C3 /* Patient.swift in Sources */,
+				950A735B30542EBA004E965E /* AuthenticationManager.swift in Sources */,
 				95059B993050AB11000369D5 /* SignInView.swift in Sources */,
 				484BEF032AB0F7080033C07A /* SpecialistCardView.swift in Sources */,
 				951CF1173052CF03009DB1C3 /* Login.swift in Sources */,
