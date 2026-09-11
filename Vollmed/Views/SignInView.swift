@@ -14,7 +14,7 @@ struct SignInView: View {
     @State private var showAlert: Bool = false
     @State private var isLoading: Bool = false
     
-    @ObservedObject var authManager = AuthenticationManager()
+    var authManager = AuthenticationManager.shared
     
     let service = WebService()
     

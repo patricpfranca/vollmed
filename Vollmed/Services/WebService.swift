@@ -10,6 +10,7 @@ import UIKit
 struct WebService {
     
     private let baseURL = "http://localhost:3001"
+    var authManager = AuthenticationManager.shared
     
     let imageCache = NSCache<NSString, UIImage>()
     
@@ -21,7 +22,7 @@ struct WebService {
             return false
         }
         
-        guard let token = KeychainHelper.get(for: "app-vollmed-token") else {
+        guard let token = authManager.token else {
             print("Token não informado")
             return false
         }
@@ -93,7 +94,7 @@ struct WebService {
             return false
         }
         
-        guard let token = KeychainHelper.get(for: "app-vollmed-token") else {
+        guard let token = authManager.token else {
             print("Token não informado")
             return false
         }
@@ -126,7 +127,7 @@ struct WebService {
             return nil
         }
         
-        guard let token = KeychainHelper.get(for: "app-vollmed-token") else {
+        guard let token = authManager.token else {
             print("Token não informado")
             return nil
         }
@@ -151,7 +152,7 @@ struct WebService {
     func getAllAppointmentsFromPatient(patientID: String) async throws -> [Appointment]? {
         let endpoint = "\(baseURL)/paciente/\(patientID)/consultas"
         
-        guard let token = KeychainHelper.get(for: "app-vollmed-token") else {
+        guard let token = authManager.token else {
             print("Token não informado")
             return nil
         }
@@ -182,7 +183,7 @@ struct WebService {
             return nil
         }
         
-        guard let token = KeychainHelper.get(for: "app-vollmed-token") else {
+        guard let token = authManager.token else {
             print("Token não informado")
             return nil
         }
