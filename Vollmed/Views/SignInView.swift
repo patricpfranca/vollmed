@@ -12,73 +12,85 @@ struct SignInView: View {
     @State private var email: String = ""
     @State private var password: String = ""
     @State private var showAlert: Bool = false
+    @State private var isLoading: Bool = false
     
     let service = WebService()
     
     func login() async {
         do {
+            isLoading = true
             if let response = try await service.loginPatient(email: email, password: password) {
                 UserDefaultsHelper.save(value: response.token, key: "token")
                 UserDefaultsHelper.save(value: response.id, key: "patient-id")
+                isLoading = false
             } else {
+                isLoading = false
                 showAlert = true
             }
         } catch {
+            isLoading = false
             showAlert = true
             print("Ocorreu um erro no login \(error)")
         }
     }
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 16.0) {
-            Image(.logo)
-                .resizable()
-                .scaledToFit()
-                .frame(maxWidth: .infinity, maxHeight: 36.0, alignment: .center)
-            
-            Text("Olá")
-                .font(.title2)
-                .bold()
-                .foregroundStyle(.accent)
-            
-            Text("Preencha para acessar sua conta.")
-                .font(.title3)
-                .foregroundStyle(.gray)
-                .padding(.bottom)
-            
-            TextFieldLabelView(label: "Email", placeholder: "Insira seu email", value: $email, keyboardType: .emailAddress)
-                .autocorrectionDisabled()
-                .textInputAutocapitalization(.never)
-            
-            TextFieldLabelView(label: "Senha", placeholder: "Insira sua senha", value: $password, isSecure: true)
-            
-            Button(action: {
-                Task {
-                    await login()
-                }
-            }, label: {
-                ButtonView(text: "Entrar")
-            })
-            
-            NavigationLink {
-                SignUpView()
-            } label: {
-                Text("Ainda não possui uma conta? Cadastre-se")
+        
+        if isLoading {
+            ProgressView("Loading...")
+                .progressViewStyle(.circular)
+                .tint(Color.accent)
+                .scaleEffect(1.5)
+        } else {
+            VStack(alignment: .leading, spacing: 16.0) {
+                Image(.logo)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(maxWidth: .infinity, maxHeight: 36.0, alignment: .center)
+                
+                Text("Olá")
+                    .font(.title2)
                     .bold()
-                    .frame(maxWidth: .infinity, alignment: .center)
+                    .foregroundStyle(.accent)
+                
+                Text("Preencha para acessar sua conta.")
+                    .font(.title3)
+                    .foregroundStyle(.gray)
+                    .padding(.bottom)
+                
+                TextFieldLabelView(label: "Email", placeholder: "Insira seu email", value: $email, keyboardType: .emailAddress)
+                    .autocorrectionDisabled()
+                    .textInputAutocapitalization(.never)
+                
+                TextFieldLabelView(label: "Senha", placeholder: "Insira sua senha", value: $password, isSecure: true)
+                
+                Button(action: {
+                    Task {
+                        await login()
+                    }
+                }, label: {
+                    ButtonView(text: "Entrar")
+                })
+                
+                NavigationLink {
+                    SignUpView()
+                } label: {
+                    Text("Ainda não possui uma conta? Cadastre-se")
+                        .bold()
+                        .frame(maxWidth: .infinity, alignment: .center)
+                }
+
             }
-
+            .padding()
+            .navigationBarBackButtonHidden()
+            .alert("Ops, algo deu errado!", isPresented: $showAlert) {
+                Button(action: {}, label: {
+                    Text("OK")
+                })
+            } message: {
+                Text("Houve um erro ao entrar na sua conta. Por favor, tente novamente.")
+            }
         }
-        .padding()
-        .navigationBarBackButtonHidden()
-        .alert("Ops, algo deu errado!", isPresented: $showAlert) {
-            Button(action: {}, label: {
-                Text("OK")
-            })
-        } message: {
-            Text("Houve um erro ao entrar na sua conta. Por favor, tente novamente.")
-        }
-
     }
 }
 
