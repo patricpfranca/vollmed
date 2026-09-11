@@ -14,14 +14,16 @@ struct SignInView: View {
     @State private var showAlert: Bool = false
     @State private var isLoading: Bool = false
     
+    @ObservedObject var authManager = AuthenticationManager()
+    
     let service = WebService()
     
     func login() async {
         do {
             isLoading = true
             if let response = try await service.loginPatient(email: email, password: password) {
-                KeychainHelper.save(value: response.token, key: "app-vollmed-token")
-                KeychainHelper.save(value: response.id, key: "app-vollmed-patient-id")
+                authManager.saveToken(token: response.token)
+                authManager.savePatientID(id: response.id)
                 isLoading = false
             } else {
                 isLoading = false
