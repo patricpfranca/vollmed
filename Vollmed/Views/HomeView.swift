@@ -9,30 +9,16 @@ import SwiftUI
 
 struct HomeView: View {
     
-    let service = WebService()
-    var authManager = AuthenticationManager.shared
+    var viewModel = HomeViewModel()
     
     @State private var specialists: [Specialist] = []
     
     func getSpecialists() async {
         do {
-            if let specialists = try await service.getAllSpecialists() {
-                self.specialists = specialists
-            }
+            let response = try await viewModel.getSpecialists()
+            self.specialists = response
         } catch {
-            print("Ocorreu um erro ao obter especialistas: \(error)")
-        }
-    }
-    
-    func logout() async {
-        do {
-            let logoutSuccessful = try await service.logoutPatient()
-            if logoutSuccessful {
-                authManager.removeToken()
-                authManager.removePatientID()
-            }
-        } catch {
-            print("Ocorreu um erro no logout: \(error)")
+            print("Erro ao buscar especialistas \(error.localizedDescription)")
         }
     }
     
@@ -71,7 +57,7 @@ struct HomeView: View {
             ToolbarItem(placement: .topBarTrailing) {
                 Button(action: {
                     Task {
-                        await logout()
+                        await viewModel.logout()
                     }
                 }, label: {
                     HStack(spacing: 2) {
