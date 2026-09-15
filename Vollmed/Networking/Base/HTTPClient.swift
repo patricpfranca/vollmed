@@ -8,11 +8,11 @@
 import Foundation
 
 protocol HTTPClient {
-    func sendRequest<T: Decodable>(endpoint: Endpoint, responseModel: T.Type?) async -> Result<T, RequestError>
+    func sendRequest<T: Decodable>(endpoint: Endpoint, responseModel: T.Type?) async -> Result<T?, RequestError>
 }
 
 extension HTTPClient {
-    func sendRequest<T: Decodable>(endpoint: Endpoint, responseModel: T.Type?) async -> Result<T, RequestError> {
+    func sendRequest<T: Decodable>(endpoint: Endpoint, responseModel: T.Type?) async -> Result<T?, RequestError> {
         
         var urlComponents = URLComponents()
         urlComponents.scheme = endpoint.scheme
@@ -40,14 +40,24 @@ extension HTTPClient {
             }
             
             switch response.statusCode {
+            
             case 200...299:
                 guard let responseModel = responseModel else {
                     return .success(nil)
                 }
+                
+                guard let decodedResponse = try? JSONDecoder().decode(responseModel, from: data) else {
+                    return .failure(.decode)
+                }
+                
+                return .success(decodedResponse)
+            case 401:
+                return .failure(.unauthorized)
+            default:
+                return .failure(.unknown)
             }
         } catch {
-            
+            return .failure(.unknown)
         }
-        
     }
 }
