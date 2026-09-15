@@ -12,11 +12,13 @@ struct HomeViewModel {
     
     // MARK: - Attributes
     let service: HomeServiceable
+    let authService: AuthenticationServiceable
     var authManager = AuthenticationManager.shared
     
     // MARK: - Init
-    init(service: HomeServiceable) {
+    init(service: HomeServiceable, authService: AuthenticationServiceable) {
         self.service = service
+        self.authService = authService
     }
     
     // MARK: - Class Methods
@@ -32,14 +34,17 @@ struct HomeViewModel {
     }
     
     func logout() async {
-        let oldService = WebService()
-        do {
-            _ = try await oldService.logoutPatient()
-            
+        let result = try await authService.logout()
+        
+        switch result {
+        case .success(_ ):
             authManager.removeToken()
             authManager.removePatientID()
-        } catch {
-            print("Ocorreu um erro no logout: \(error)")
+        case .failure(let error):
+            print(error.localizedDescription)
         }
+        
+        
+
     }
 }

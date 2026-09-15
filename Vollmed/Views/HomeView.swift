@@ -9,7 +9,8 @@ import SwiftUI
 
 struct HomeView: View {
     
-    var viewModel = HomeViewModel(service: HomeNetworkingService())
+    var viewModel = HomeViewModel(service: HomeNetworkingService(),
+                                  authService: AuthenticationService())
     
     @State private var specialists: [Specialist] = []
     
