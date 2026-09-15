@@ -25,6 +25,10 @@
 		951CF1153052C823009DB1C3 /* Patient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 951CF1143052C823009DB1C3 /* Patient.swift */; };
 		951CF1173052CF03009DB1C3 /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = 951CF1163052CF03009DB1C3 /* Login.swift */; };
 		951CF1193052DDCB009DB1C3 /* UserDefaultsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 951CF1183052DDCB009DB1C3 /* UserDefaultsHelper.swift */; };
+		95433B0830595DB3004BBE1A /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95433B0730595DB3004BBE1A /* HTTPClient.swift */; };
+		955AD1DC305817BF00D42195 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955AD1DB305817BF00D42195 /* Endpoint.swift */; };
+		955AD1DE305818D200D42195 /* RequestMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955AD1DD305818D200D42195 /* RequestMethod.swift */; };
+		955AD1E030581E5B00D42195 /* RequestError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955AD1DF30581E5B00D42195 /* RequestError.swift */; };
 		9580721630498C960096171B /* ScheduleAppointmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9580721530498C960096171B /* ScheduleAppointmentView.swift */; };
 		958072193049927E0096171B /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 958072183049927E0096171B /* Date+.swift */; };
 		9580721B304993E30096171B /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9580721A304993E30096171B /* String+.swift */; };
@@ -54,6 +58,10 @@
 		951CF1143052C823009DB1C3 /* Patient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Patient.swift; sourceTree = "<group>"; };
 		951CF1163052CF03009DB1C3 /* Login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
 		951CF1183052DDCB009DB1C3 /* UserDefaultsHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsHelper.swift; sourceTree = "<group>"; };
+		95433B0730595DB3004BBE1A /* HTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClient.swift; sourceTree = "<group>"; };
+		955AD1DB305817BF00D42195 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
+		955AD1DD305818D200D42195 /* RequestMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestMethod.swift; sourceTree = "<group>"; };
+		955AD1DF30581E5B00D42195 /* RequestError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestError.swift; sourceTree = "<group>"; };
 		9580721530498C960096171B /* ScheduleAppointmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleAppointmentView.swift; sourceTree = "<group>"; };
 		958072183049927E0096171B /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
 		9580721A304993E30096171B /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
@@ -139,6 +147,7 @@
 		48539DEB2AB0F47C005BD7C9 /* Vollmed */ = {
 			isa = PBXGroup;
 			children = (
+				955AD1D73058176D00D42195 /* Networking */,
 				95DEF18A30580D1D009AE46E /* ViewModels */,
 				950A735930542EA9004E965E /* Managers */,
 				958072173049926A0096171B /* Extensions */,
@@ -167,6 +176,41 @@
 				950A735A30542EBA004E965E /* AuthenticationManager.swift */,
 			);
 			path = Managers;
+			sourceTree = "<group>";
+		};
+		955AD1D73058176D00D42195 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				955AD1D83058178500D42195 /* Base */,
+				955AD1DA3058179300D42195 /* Services */,
+				955AD1D93058178C00D42195 /* Endpoints */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		955AD1D83058178500D42195 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				955AD1DB305817BF00D42195 /* Endpoint.swift */,
+				955AD1DD305818D200D42195 /* RequestMethod.swift */,
+				955AD1DF30581E5B00D42195 /* RequestError.swift */,
+				95433B0730595DB3004BBE1A /* HTTPClient.swift */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		955AD1D93058178C00D42195 /* Endpoints */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Endpoints;
+			sourceTree = "<group>";
+		};
+		955AD1DA3058179300D42195 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 		958072173049926A0096171B /* Extensions */ = {
@@ -259,6 +303,8 @@
 				95ADEF64304AE57E00603DD8 /* Appointment.swift in Sources */,
 				958072193049927E0096171B /* Date+.swift in Sources */,
 				95059B9D30517847000369D5 /* TextFieldLabelView.swift in Sources */,
+				955AD1DE305818D200D42195 /* RequestMethod.swift in Sources */,
+				95433B0830595DB3004BBE1A /* HTTPClient.swift in Sources */,
 				9580721D304996980096171B /* ScheduleAppointment.swift in Sources */,
 				950A7358305423BB004E965E /* KeychainHelper.swift in Sources */,
 				95DEF18C30580D36009AE46E /* HomeViewModel.swift in Sources */,
@@ -266,6 +312,7 @@
 				9580721B304993E30096171B /* String+.swift in Sources */,
 				484BEF052AB0F7970033C07A /* HomeView.swift in Sources */,
 				95059B9730509D88000369D5 /* CancelAppointmentView.swift in Sources */,
+				955AD1DC305817BF00D42195 /* Endpoint.swift in Sources */,
 				484BEEFD2AB0F5750033C07A /* Specialist.swift in Sources */,
 				484BEF012AB0F6090033C07A /* ButtonView.swift in Sources */,
 				951CF1193052DDCB009DB1C3 /* UserDefaultsHelper.swift in Sources */,
@@ -276,6 +323,7 @@
 				951CF1173052CF03009DB1C3 /* Login.swift in Sources */,
 				484BEEFF2AB0F59D0033C07A /* WebService.swift in Sources */,
 				95059B9B3050AE47000369D5 /* SignUpView.swift in Sources */,
+				955AD1E030581E5B00D42195 /* RequestError.swift in Sources */,
 				48539DED2AB0F47C005BD7C9 /* VollmedApp.swift in Sources */,
 				95ADEF62304AE25500603DD8 /* MyAppointmentsView.swift in Sources */,
 				9580721630498C960096171B /* ScheduleAppointmentView.swift in Sources */,
