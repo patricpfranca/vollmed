@@ -26,6 +26,8 @@
 		951CF1173052CF03009DB1C3 /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = 951CF1163052CF03009DB1C3 /* Login.swift */; };
 		951CF1193052DDCB009DB1C3 /* UserDefaultsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 951CF1183052DDCB009DB1C3 /* UserDefaultsHelper.swift */; };
 		95433B0830595DB3004BBE1A /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95433B0730595DB3004BBE1A /* HTTPClient.swift */; };
+		95433B0A305965A9004BBE1A /* HomeEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95433B09305965A9004BBE1A /* HomeEndpoint.swift */; };
+		95433B0C30596850004BBE1A /* HomeNetworkingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95433B0B30596850004BBE1A /* HomeNetworkingService.swift */; };
 		955AD1DC305817BF00D42195 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955AD1DB305817BF00D42195 /* Endpoint.swift */; };
 		955AD1DE305818D200D42195 /* RequestMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955AD1DD305818D200D42195 /* RequestMethod.swift */; };
 		955AD1E030581E5B00D42195 /* RequestError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955AD1DF30581E5B00D42195 /* RequestError.swift */; };
@@ -59,6 +61,8 @@
 		951CF1163052CF03009DB1C3 /* Login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
 		951CF1183052DDCB009DB1C3 /* UserDefaultsHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsHelper.swift; sourceTree = "<group>"; };
 		95433B0730595DB3004BBE1A /* HTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClient.swift; sourceTree = "<group>"; };
+		95433B09305965A9004BBE1A /* HomeEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeEndpoint.swift; sourceTree = "<group>"; };
+		95433B0B30596850004BBE1A /* HomeNetworkingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeNetworkingService.swift; sourceTree = "<group>"; };
 		955AD1DB305817BF00D42195 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		955AD1DD305818D200D42195 /* RequestMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestMethod.swift; sourceTree = "<group>"; };
 		955AD1DF30581E5B00D42195 /* RequestError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestError.swift; sourceTree = "<group>"; };
@@ -202,6 +206,7 @@
 		955AD1D93058178C00D42195 /* Endpoints */ = {
 			isa = PBXGroup;
 			children = (
+				95433B09305965A9004BBE1A /* HomeEndpoint.swift */,
 			);
 			path = Endpoints;
 			sourceTree = "<group>";
@@ -209,6 +214,7 @@
 		955AD1DA3058179300D42195 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				95433B0B30596850004BBE1A /* HomeNetworkingService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -300,6 +306,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				95433B0C30596850004BBE1A /* HomeNetworkingService.swift in Sources */,
 				95ADEF64304AE57E00603DD8 /* Appointment.swift in Sources */,
 				958072193049927E0096171B /* Date+.swift in Sources */,
 				95059B9D30517847000369D5 /* TextFieldLabelView.swift in Sources */,
@@ -323,6 +330,7 @@
 				951CF1173052CF03009DB1C3 /* Login.swift in Sources */,
 				484BEEFF2AB0F59D0033C07A /* WebService.swift in Sources */,
 				95059B9B3050AE47000369D5 /* SignUpView.swift in Sources */,
+				95433B0A305965A9004BBE1A /* HomeEndpoint.swift in Sources */,
 				955AD1E030581E5B00D42195 /* RequestError.swift in Sources */,
 				48539DED2AB0F47C005BD7C9 /* VollmedApp.swift in Sources */,
 				95ADEF62304AE25500603DD8 /* MyAppointmentsView.swift in Sources */,

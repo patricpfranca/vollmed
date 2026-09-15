@@ -10,25 +10,31 @@ import Foundation
 @MainActor
 struct HomeViewModel {
     
-    let service = WebService()
+    // MARK: - Attributes
+    let service: HomeServiceable
     var authManager = AuthenticationManager.shared
     
-    func getSpecialists() async throws -> [Specialist] {
-        do {
-            if let fetchedSpecialists = try await service.getAllSpecialists() {
-                return fetchedSpecialists
-            }
-            
-            return []
-        } catch {
-            print("Ocorreu um erro ao obter especialistas: \(error)")
+    // MARK: - Init
+    init(service: HomeServiceable) {
+        self.service = service
+    }
+    
+    // MARK: - Class Methods
+    func getSpecialists() async throws -> [Specialist]? {
+        let result = try await service.getAllSpecialists()
+        
+        switch result {
+        case .success(let response):
+            return response
+        case .failure(let error):
             throw error
         }
     }
     
     func logout() async {
+        let oldService = WebService()
         do {
-            _ = try await service.logoutPatient()
+            _ = try await oldService.logoutPatient()
             
             authManager.removeToken()
             authManager.removePatientID()

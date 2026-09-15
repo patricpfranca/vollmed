@@ -9,13 +9,15 @@ import SwiftUI
 
 struct HomeView: View {
     
-    var viewModel = HomeViewModel()
+    var viewModel = HomeViewModel(service: HomeNetworkingService())
     
     @State private var specialists: [Specialist] = []
     
     func getSpecialists() async {
         do {
-            let response = try await viewModel.getSpecialists()
+            guard let response = try await viewModel.getSpecialists() else {
+                return
+            }
             self.specialists = response
         } catch {
             print("Erro ao buscar especialistas \(error.localizedDescription)")
